@@ -51,7 +51,7 @@ android {
   }
 
   kotlin.compilerOptions.jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_1_8)
-  
+
 }
 
 repositories {
@@ -129,5 +129,3 @@ tasks.register('run', Exec) {
   def adb = path + "/platform-tools/adb"
   commandLine "$adb", 'shell', 'am', 'start', '-n', 'dev.ebnbin.emojiwar/dev.ebnbin.emojiwar.android.AndroidLauncher'
 }
-
-eclipse.project.name = appName + "-android"
