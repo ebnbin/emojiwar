@@ -8,6 +8,7 @@ buildscript {
     classpath Dependencies.ROBOVM_GRADLE_PLUGIN
   }
 }
+apply plugin: 'kotlin'
 apply plugin: 'robovm'
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(BuildConfig.JAVA_VERSION))
