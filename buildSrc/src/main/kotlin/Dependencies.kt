@@ -8,6 +8,9 @@ object Dependencies {
 
         // https://github.com/libktx/ktx
         const val KTX = "1.12.1-rc2"
+
+        // https://github.com/Mazatech/amanithsvg-sdk
+        const val AMANITHSVG_SDK = "2.0.1"
     }
 
     // https://github.com/libgdx/libgdx
@@ -72,4 +75,12 @@ object Dependencies {
     const val KTX_TILED = "io.github.libktx:ktx-tiled:${Versions.KTX}"
     const val KTX_VIS = "io.github.libktx:ktx-vis:${Versions.KTX}"
     const val KTX_VIS_STYLE = "io.github.libktx:ktx-vis-style:${Versions.KTX}"
+
+    // https://github.com/Mazatech/amanithsvg-sdk
+    const val AMANITHSVG_GDX_NATIVES_DESKTOP = "com.mazatech.amanithsvg:amanithsvg-gdx:${Versions.AMANITHSVG_SDK}:natives-desktop"
+    const val AMANITHSVG_GDX_NATIVES_ARMEABI_V7A = "com.mazatech.amanithsvg:amanithsvg-gdx:${Versions.AMANITHSVG_SDK}:natives-armeabi-v7a"
+    const val AMANITHSVG_GDX_NATIVES_ARM64_V8A = "com.mazatech.amanithsvg:amanithsvg-gdx:${Versions.AMANITHSVG_SDK}:natives-arm64-v8a"
+    const val AMANITHSVG_GDX_NATIVES_X86 = "com.mazatech.amanithsvg:amanithsvg-gdx:${Versions.AMANITHSVG_SDK}:natives-x86"
+    const val AMANITHSVG_GDX_NATIVES_X86_64 = "com.mazatech.amanithsvg:amanithsvg-gdx:${Versions.AMANITHSVG_SDK}:natives-x86_64"
+    const val AMANITHSVG_GDX_NATIVES_IOS = "com.mazatech.amanithsvg:amanithsvg-gdx:${Versions.AMANITHSVG_SDK}:natives-ios"
 }
