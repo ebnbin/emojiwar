@@ -18,7 +18,6 @@ buildscript {
 }
 
 subprojects {
-  ext.appName = 'emojiwar'
   repositories {
     mavenCentral()
     maven { url 'https://s01.oss.sonatype.org' }

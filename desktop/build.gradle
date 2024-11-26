@@ -43,7 +43,7 @@ run {
 
 jar {
 // sets the name of the .jar file this produces to the name of the game or app, with the version after.
-  archiveFileName.set("${appName}-${BuildConfig.VERSION}.jar")
+  archiveFileName.set("${BuildConfig.SHORT_ID}-${BuildConfig.VERSION}.jar")
 // the duplicatesStrategy matters starting in Gradle 7.0; this setting works.
   duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
   dependsOn configurations.runtimeClasspath
@@ -65,9 +65,9 @@ jar {
 
 construo {
     // name of the executable
-    name.set(appName)
+    name.set(BuildConfig.SHORT_ID)
     // human-readable name, used for example in the `.app` name for macOS
-    humanName.set(appName)
+    humanName.set(BuildConfig.SHORT_ID)
     // Optional, defaults to project version property
     version.set(BuildConfig.VERSION)
 
@@ -80,7 +80,7 @@ construo {
         architecture.set(Target.Architecture.AARCH64)
         jdkUrl.set("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.12%2B7/OpenJDK17U-jdk_aarch64_mac_hotspot_17.0.12_7.tar.gz")
         // macOS needs an identifier
-        identifier.set("dev.ebnbin.emojiwar." + appName)
+        identifier.set(BuildConfig.ID)
         // Optional: icon for macOS
         macIcon.set(project.file("icons/logo.icns"))
       }
@@ -88,7 +88,7 @@ construo {
         architecture.set(Target.Architecture.X86_64)
         jdkUrl.set("https://github.com/adoptium/temurin17-binaries/releases/download/jdk-17.0.12%2B7/OpenJDK17U-jdk_x64_mac_hotspot_17.0.12_7.tar.gz")
         // macOS needs an identifier
-        identifier.set("dev.ebnbin.emojiwar." + appName)
+        identifier.set(BuildConfig.ID)
         // Optional: icon for macOS
         macIcon.set(project.file("icons/logo.icns"))
       }
