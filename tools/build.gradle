@@ -6,7 +6,7 @@ apply plugin: 'org.jetbrains.kotlin.jvm'
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(BuildConfig.JAVA_VERSION))
 
-mainClassName = 'dev.ebnbin.emojiwar.headless.HeadlessLauncher'
+mainClassName = 'dev.ebnbin.emojiwar.tools.ToolsLauncher'
 application.setMainClass(mainClassName)
 
 dependencies {
