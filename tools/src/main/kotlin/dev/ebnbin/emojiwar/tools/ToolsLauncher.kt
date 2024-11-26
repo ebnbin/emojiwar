@@ -7,6 +7,7 @@ import com.badlogic.gdx.backends.headless.HeadlessApplication
 import com.badlogic.gdx.backends.headless.HeadlessApplicationConfiguration
 
 fun main() {
+    if (StartupHelper.startNewJvmIfRequired()) return
     runHeadlessApplication {
     }
 }
