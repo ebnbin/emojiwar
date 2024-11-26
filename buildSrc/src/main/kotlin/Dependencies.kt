@@ -9,8 +9,8 @@ object Dependencies {
 
     // https://github.com/libgdx/libgdx
     const val GDX = "com.badlogicgames.gdx:gdx:${Versions.GDX}"
-    const val GDX_BACKEND_HEADLESS = "com.badlogicgames.gdx:gdx-backend-headless:${Versions.GDX}"
     const val GDX_BACKEND_LWJGL3 = "com.badlogicgames.gdx:gdx-backend-lwjgl3:${Versions.GDX}"
+    const val GDX_BACKEND_HEADLESS = "com.badlogicgames.gdx:gdx-backend-headless:${Versions.GDX}"
     const val GDX_BACKEND_ANDROID = "com.badlogicgames.gdx:gdx-backend-android:${Versions.GDX}"
     const val GDX_BACKEND_ROBOVM = "com.badlogicgames.gdx:gdx-backend-robovm:${Versions.GDX}"
     const val GDX_PLATFORM_NATIVES_DESKTOP = "com.badlogicgames.gdx:gdx-platform:${Versions.GDX}:natives-desktop"

@@ -21,8 +21,6 @@ dependencies {
   implementation Dependencies.GDX_FREETYPE_PLATFORM_NATIVES_DESKTOP
   implementation Dependencies.GDX_PLATFORM_NATIVES_DESKTOP
   implementation project(':core')
-  implementation(Dependencies.GDX_TOOLS){exclude group: 'com.badlogicgames.gdx', module: 'gdx-backend-lwjgl'}
-
 }
 
 def os = System.properties['os.name'].toLowerCase()
