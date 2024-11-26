@@ -1,13 +1,5 @@
 import Dependencies
 
-buildscript {
-  repositories {
-    mavenCentral()
-  }
-  dependencies {
-    classpath Dependencies.ROBOVM_GRADLE_PLUGIN
-  }
-}
 apply plugin: 'kotlin'
 apply plugin: 'robovm'
 
