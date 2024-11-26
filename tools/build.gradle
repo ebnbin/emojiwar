@@ -1,3 +1,5 @@
+import Dependencies
+
 apply plugin: 'application'
 apply plugin: 'org.jetbrains.kotlin.jvm'
 
@@ -7,7 +9,7 @@ mainClassName = 'dev.ebnbin.emojiwar.headless.HeadlessLauncher'
 application.setMainClass(mainClassName)
 
 dependencies {
-  implementation "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
-  implementation "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+  implementation Dependencies.GDX_BACKEND_HEADLESS
+  implementation Dependencies.GDX_PLATFORM_NATIVES_DESKTOP
   implementation project(':core')
 }
