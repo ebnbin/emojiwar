@@ -3,6 +3,9 @@ object Dependencies {
         // https://github.com/libgdx/libgdx
         const val GDX = "1.12.1"
 
+        // https://github.com/Kotlin/kotlinx.coroutines
+        const val KOTLINX_COROUTINES = "1.9.0"
+
         // https://github.com/MobiVM/robovm
         const val ROBOVM = "2.3.22"
 
@@ -36,6 +39,10 @@ object Dependencies {
 
     // https://github.com/JetBrains/kotlin
     const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21"
+
+    // https://github.com/Kotlin/kotlinx.coroutines
+    const val KOTLINX_COROUTINES_CORE = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.KOTLINX_COROUTINES}"
+    const val KOTLINX_COROUTINES_ANDROID = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.KOTLINX_COROUTINES}"
 
     // https://github.com/fourlastor-alexandria/construo
     const val CONSTRUO = "io.github.fourlastor:construo:1.5.1"
