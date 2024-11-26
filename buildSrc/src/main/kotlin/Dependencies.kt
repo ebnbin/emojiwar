@@ -7,9 +7,6 @@ object Dependencies {
         const val ROBOVM = "2.3.22"
     }
 
-    // https://github.com/JetBrains/kotlin
-    const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21"
-
     // https://github.com/libgdx/libgdx
     const val GDX = "com.badlogicgames.gdx:gdx:${Versions.GDX}"
     const val GDX_BACKEND_HEADLESS = "com.badlogicgames.gdx:gdx-backend-headless:${Versions.GDX}"
@@ -30,6 +27,9 @@ object Dependencies {
     const val GDX_FREETYPE_PLATFORM_NATIVES_X86 = "com.badlogicgames.gdx:gdx-freetype-platform:${Versions.GDX}:natives-x86"
     const val GDX_FREETYPE_PLATFORM_NATIVES_X86_64 = "com.badlogicgames.gdx:gdx-freetype-platform:${Versions.GDX}:natives-x86_64"
     const val GDX_FREETYPE_PLATFORM_NATIVES_IOS = "com.badlogicgames.gdx:gdx-freetype-platform:${Versions.GDX}:natives-ios"
+
+    // https://github.com/JetBrains/kotlin
+    const val KOTLIN_GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21"
 
     // https://github.com/fourlastor-alexandria/construo
     const val CONSTRUO = "io.github.fourlastor:construo:1.5.1"
