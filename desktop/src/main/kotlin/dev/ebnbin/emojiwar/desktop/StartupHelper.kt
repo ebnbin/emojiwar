@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 //Note, the above license and copyright applies to this file only.
-package dev.ebnbin.emojiwar.lwjgl3
+package dev.ebnbin.emojiwar.desktop
 
 import org.lwjgl.system.macosx.LibC
 import java.io.BufferedReader

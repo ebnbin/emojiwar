@@ -1,6 +1,6 @@
 @file:JvmName("Lwjgl3Launcher")
 
-package dev.ebnbin.emojiwar.lwjgl3
+package dev.ebnbin.emojiwar.desktop
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration
