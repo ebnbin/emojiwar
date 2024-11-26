@@ -13,7 +13,7 @@ import io.github.fourlastor.construo.Target
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(BuildConfig.JAVA_VERSION))
 
 sourceSets.main.resources.srcDirs += [ rootProject.file('assets').path ]
-mainClassName = 'dev.ebnbin.emojiwar.desktop.Lwjgl3Launcher'
+mainClassName = 'dev.ebnbin.emojiwar.desktop.DesktopLauncher'
 application.setMainClass(mainClassName)
 
 dependencies {
