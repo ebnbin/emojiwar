@@ -7,7 +7,5 @@ java.toolchain.languageVersion.set(JavaLanguageVersion.of(BuildConfig.JAVA_VERSI
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 dependencies {
-  api Dependencies.GDX_FREETYPE
-  api Dependencies.GDX
   api project(':kgdx')
 }
