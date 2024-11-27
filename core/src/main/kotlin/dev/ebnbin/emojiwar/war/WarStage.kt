@@ -15,10 +15,14 @@ class WarStage : LifecycleStage(object : ScreenViewport() {
         super.update(screenWidth, screenHeight, centerCamera)
     }
 }) {
-    init {
-        camera.position.set(COLUMNS / 2f, ROWS / 2f, 0f)
-        camera.update()
-    }
+    private val cameraHelper: WarCameraHelper = WarCameraHelper(
+        camera = camera,
+        rows = ROWS,
+        columns = COLUMNS,
+        marginHorizontal = MARGIN_HORIZONTAL,
+        marginBottom = MARGIN_BOTTOM,
+        marginTop = MARGIN_TOP,
+    )
 
     init {
         WarBackgroundActor(
@@ -43,16 +47,17 @@ class WarStage : LifecycleStage(object : ScreenViewport() {
         addActor(it)
     }
 
+    override fun resize(width: Float, height: Float) {
+        super.resize(width, height)
+        cameraHelper.resize(width, height)
+    }
+
     override fun act(delta: Float) {
         super.act(delta)
         val minImageX = 0.5f
         val maxImageX = COLUMNS - 0.5f
         val minImageY = 0.5f
         val maxImageY = ROWS - 0.5f
-        val minCameraX = width / 2f - MARGIN_HORIZONTAL
-        val maxCameraX = COLUMNS - width / 2f + MARGIN_HORIZONTAL
-        val minCameraY = height / 2f - MARGIN_BOTTOM
-        val maxCameraY = ROWS - height / 2f + MARGIN_TOP
         val offsetX = if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             -delta * SPEED
         } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
@@ -70,20 +75,7 @@ class WarStage : LifecycleStage(object : ScreenViewport() {
         val imageX = (image.getX(Align.center) + offsetX).coerceIn(minImageX, maxImageX)
         val imageY = (image.getY(Align.center) + offsetY).coerceIn(minImageY, maxImageY)
         image.setPosition(imageX, imageY, Align.center)
-        camera.position.set(
-            if (minCameraX > maxCameraX) {
-                COLUMNS / 2f
-            } else {
-                imageX.coerceIn(minCameraX, maxCameraX)
-            },
-            if (minCameraY > maxCameraY) {
-                (ROWS - MARGIN_BOTTOM + MARGIN_TOP) / 2f
-            } else {
-                imageY.coerceIn(minCameraY, maxCameraY)
-            },
-            0f,
-        )
-        camera.update()
+        cameraHelper.act(imageX, imageY)
     }
 
     companion object {
