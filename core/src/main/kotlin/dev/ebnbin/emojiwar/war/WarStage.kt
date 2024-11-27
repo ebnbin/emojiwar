@@ -61,12 +61,12 @@ class WarStage : LifecycleStage(object : ScreenViewport() {
         private const val TILES_PER_SCREEN = 10f
         private const val ROWS = 21
         private const val COLUMNS = 21
-        private const val BACKGROUND_EMOJI_DENSITY = 0.1f
+        private const val BACKGROUND_EMOJI_DENSITY = 0.2f
         private const val BACKGROUND_EMOJI_DIVERSITY = 5
         private const val BACKGROUND_EMOJI_ALPHA = 0.2f
         private const val BACKGROUND_EMOJI_SCALE_MIN = 0.25f
         private const val BACKGROUND_EMOJI_SCALE_MAX = 0.75f
-        private const val BACKGROUND_EMOJI_OFFSET_ABS = 0.25f
+        private const val BACKGROUND_EMOJI_OFFSET_ABS = 0.75f
         private const val MARGIN_HORIZONTAL = 1f
         private const val MARGIN_BOTTOM = 0.5f
         private const val MARGIN_TOP = 1.5f

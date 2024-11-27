@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.Texture
 import com.badlogic.gdx.graphics.g2d.Batch
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.math.Rectangle
 import com.badlogic.gdx.scenes.scene2d.Actor
+import com.badlogic.gdx.scenes.scene2d.utils.ScissorStack
 import kotlin.random.Random
 
 class WarBackgroundActor(
@@ -61,6 +63,10 @@ class WarBackgroundActor(
         shapeRenderer.end()
         Gdx.gl.glDisable(GL20.GL_BLEND)
         batch.begin()
+        val area = Rectangle(x, y, width, height)
+        val scissor = Rectangle()
+        ScissorStack.calculateScissors(requireNotNull(stage).camera, batch.transformMatrix, area, scissor)
+        if (!ScissorStack.pushScissors(scissor)) return
         batch.color = color.cpy().also { it.a *= parentAlpha * alpha }
         tileList.forEach { tile ->
             batch.draw(
@@ -82,5 +88,7 @@ class WarBackgroundActor(
                 true,
             )
         }
+        batch.flush()
+        ScissorStack.popScissors()
     }
 }

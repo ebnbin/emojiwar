@@ -18,6 +18,10 @@ class WarActor(
     characterSpeed: Float,
     characterTexture: Texture,
 ) : Actor() {
+    init {
+        setSize(columns.toFloat(), rows.toFloat())
+    }
+
     private val engine: WarEngine = WarEngine(
         rows = rows,
         columns = columns,
