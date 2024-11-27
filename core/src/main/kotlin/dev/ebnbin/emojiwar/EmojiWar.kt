@@ -1,11 +1,12 @@
 package dev.ebnbin.emojiwar
 
 import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.graphics.g2d.SpriteBatch
 import com.badlogic.gdx.utils.ScreenUtils
 import com.mazatech.gdx.SVGAssetsConfigGDX
 import com.mazatech.gdx.SVGAssetsGDX
+import dev.ebnbin.emojiwar.war.WarStage
 import dev.ebnbin.kgdx.Game
 import dev.ebnbin.kgdx.game
 import java.util.zip.ZipInputStream
@@ -14,30 +15,54 @@ val emojiWar: EmojiWar
     get() = game as EmojiWar
 
 class EmojiWar : Game() {
-    private lateinit var spriteBatch: SpriteBatch
-    private lateinit var texture: Texture
+    lateinit var emojiTextureMap: Map<String, Texture>
+        private set
+
+    private lateinit var warStage: WarStage
 
     override fun create() {
         super.create()
-        spriteBatch = SpriteBatch()
-        texture = createEmojiTexture("1F600")
+        emojiTextureMap = createEmojiTextureMap()
+        warStage = WarStage()
+    }
+
+    override fun resize(width: Int, height: Int) {
+        super.resize(width, height)
+        warStage.viewport.update(width, height, true)
     }
 
     override fun render() {
         super.render()
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f)
-        spriteBatch.begin()
-        spriteBatch.drawEmojiTexture(texture)
-        spriteBatch.end()
+        warStage.act(Gdx.graphics.deltaTime)
+        ScreenUtils.clear(Color.CLEAR)
+        warStage.viewport.apply()
+        warStage.draw()
     }
 
     override fun dispose() {
-        texture.dispose()
-        spriteBatch.dispose()
+        warStage.dispose()
+        emojiTextureMap.values.forEach(Texture::dispose)
         super.dispose()
     }
 
     companion object {
+        private fun createEmojiTextureMap(): Map<String, Texture> {
+            val nameList = mutableListOf<String>()
+            val zipFileHandler = Gdx.files.internal("openmoji-svg-color.zip")
+            ZipInputStream(zipFileHandler.read()).use { zipInputStream ->
+                while (true) {
+                    val zipEntry = zipInputStream.nextEntry ?: break
+                    if (zipEntry.name.endsWith(".svg")) {
+                        nameList.add(zipEntry.name.removeSuffix(".svg"))
+                    }
+                }
+            }
+            nameList.shuffle()
+            return nameList.take(10).associateWith {
+                createEmojiTexture(it)
+            }
+        }
+
         private fun createEmojiTexture(name: String): Texture {
             val zipFileHandler = Gdx.files.internal("openmoji-svg-color.zip")
             ZipInputStream(zipFileHandler.read()).use { zipInputStream ->
@@ -63,11 +88,6 @@ class EmojiWar : Game() {
                 }
             }
             error(Unit)
-        }
-
-        private fun SpriteBatch.drawEmojiTexture(texture: Texture) {
-            draw(texture, 0f, 0f, texture.width.toFloat(), texture.height.toFloat(), 0, 0, texture.width,
-                texture.height, false, true)
         }
     }
 }
