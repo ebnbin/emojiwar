@@ -1,14 +1,13 @@
 package dev.ebnbin.emojiwar
 
 import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.Texture
-import com.badlogic.gdx.utils.ScreenUtils
 import com.mazatech.gdx.SVGAssetsConfigGDX
 import com.mazatech.gdx.SVGAssetsGDX
 import dev.ebnbin.emojiwar.war.WarStage
 import dev.ebnbin.kgdx.Game
 import dev.ebnbin.kgdx.game
+import dev.ebnbin.kgdx.scene.Screen
 import java.util.zip.ZipInputStream
 
 val emojiWar: EmojiWar
@@ -18,29 +17,16 @@ class EmojiWar : Game() {
     lateinit var emojiTextureMap: Map<String, Texture>
         private set
 
-    private lateinit var warStage: WarStage
-
     override fun create() {
         super.create()
         emojiTextureMap = createEmojiTextureMap()
-        warStage = WarStage()
-    }
-
-    override fun resize(width: Int, height: Int) {
-        super.resize(width, height)
-        warStage.viewport.update(width, height, true)
-    }
-
-    override fun render() {
-        super.render()
-        warStage.act(Gdx.graphics.deltaTime)
-        ScreenUtils.clear(Color.CLEAR)
-        warStage.viewport.apply()
-        warStage.draw()
+        setScreen {
+            Screen(listOf(WarStage()))
+        }
     }
 
     override fun dispose() {
-        warStage.dispose()
+        setScreen(null)
         emojiTextureMap.values.forEach(Texture::dispose)
         super.dispose()
     }

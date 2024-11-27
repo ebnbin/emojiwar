@@ -5,16 +5,16 @@ import com.badlogic.gdx.Input
 import com.badlogic.gdx.graphics.Color
 import com.badlogic.gdx.graphics.GL20
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
-import com.badlogic.gdx.scenes.scene2d.Stage
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import dev.ebnbin.emojiwar.emojiWar
+import dev.ebnbin.kgdx.scene.LifecycleStage
 import ktx.actors.alpha
 import kotlin.math.max
 import kotlin.random.Random
 
-class WarStage : Stage(object : ScreenViewport() {
+class WarStage : LifecycleStage(object : ScreenViewport() {
     override fun update(screenWidth: Int, screenHeight: Int, centerCamera: Boolean) {
         unitsPerPixel = max(TILES_PER_SCREEN / screenWidth, TILES_PER_SCREEN / screenHeight)
         super.update(screenWidth, screenHeight, centerCamera)
