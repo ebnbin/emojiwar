@@ -55,6 +55,9 @@ object Dependencies {
     const val ROBOVM_RT = "com.mobidevelop.robovm:robovm-rt:${Versions.ROBOVM}"
     const val ROBOVM_COCOATOUCH = "com.mobidevelop.robovm:robovm-cocoatouch:${Versions.ROBOVM}"
 
+    // https://github.com/libgdx/ashley
+    const val ASHLEY = "com.badlogicgames.ashley:ashley:1.7.3"
+
     // https://github.com/libktx/ktx
     const val KTX_ACTORS = "io.github.libktx:ktx-actors:${Versions.KTX}"
     const val KTX_AI = "io.github.libktx:ktx-ai:${Versions.KTX}"

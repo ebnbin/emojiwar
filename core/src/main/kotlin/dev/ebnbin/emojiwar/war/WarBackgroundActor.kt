@@ -61,7 +61,6 @@ class WarBackgroundActor(
         shapeRenderer.end()
         Gdx.gl.glDisable(GL20.GL_BLEND)
         batch.begin()
-        val oldColor = batch.color
         batch.color = color.cpy().also { it.a *= parentAlpha * alpha }
         tileList.forEach { tile ->
             batch.draw(
@@ -83,6 +82,5 @@ class WarBackgroundActor(
                 true,
             )
         }
-        batch.color = oldColor
     }
 }

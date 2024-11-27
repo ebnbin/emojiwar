@@ -1,9 +1,5 @@
 package dev.ebnbin.emojiwar.war
 
-import com.badlogic.gdx.Gdx
-import com.badlogic.gdx.Input
-import com.badlogic.gdx.scenes.scene2d.ui.Image
-import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import dev.ebnbin.emojiwar.emojiWar
 import dev.ebnbin.kgdx.scene.LifecycleStage
@@ -39,11 +35,12 @@ class WarStage : LifecycleStage(object : ScreenViewport() {
         }
     }
 
-    private val image: Image = Image(emojiWar.emojiTextureMap.values.last()).also {
-        it.setSize(1f, 1f)
-        it.setPosition(COLUMNS / 2f, ROWS / 2f, Align.center)
-        it.setOrigin(Align.center)
-        it.scaleY = -1f
+    private val actor: WarActor = WarActor(
+        rows = ROWS,
+        columns = COLUMNS,
+        characterSpeed = SPEED,
+        characterTexture = emojiWar.emojiTextureMap.values.last(),
+    ).also {
         addActor(it)
     }
 
@@ -54,28 +51,10 @@ class WarStage : LifecycleStage(object : ScreenViewport() {
 
     override fun act(delta: Float) {
         super.act(delta)
-        val minImageX = 0.5f
-        val maxImageX = COLUMNS - 0.5f
-        val minImageY = 0.5f
-        val maxImageY = ROWS - 0.5f
-        val offsetX = if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            -delta * SPEED
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && !Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            delta * SPEED
-        } else {
-            0f
-        }
-        val offsetY = if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && !Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            -delta * SPEED
-        } else if (Gdx.input.isKeyPressed(Input.Keys.UP) && !Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            delta * SPEED
-        } else {
-            0f
-        }
-        val imageX = (image.getX(Align.center) + offsetX).coerceIn(minImageX, maxImageX)
-        val imageY = (image.getY(Align.center) + offsetY).coerceIn(minImageY, maxImageY)
-        image.setPosition(imageX, imageY, Align.center)
-        cameraHelper.act(imageX, imageY)
+        cameraHelper.act(
+            characterX = actor.getCharacterX(),
+            characterY = actor.getCharacterY(),
+        )
     }
 
     companion object {
