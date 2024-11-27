@@ -2,17 +2,12 @@ package dev.ebnbin.emojiwar.war
 
 import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.Input
-import com.badlogic.gdx.graphics.Color
-import com.badlogic.gdx.graphics.GL20
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import com.badlogic.gdx.scenes.scene2d.ui.Image
 import com.badlogic.gdx.utils.Align
 import com.badlogic.gdx.utils.viewport.ScreenViewport
 import dev.ebnbin.emojiwar.emojiWar
 import dev.ebnbin.kgdx.scene.LifecycleStage
-import ktx.actors.alpha
 import kotlin.math.max
-import kotlin.random.Random
 
 class WarStage : LifecycleStage(object : ScreenViewport() {
     override fun update(screenWidth: Int, screenHeight: Int, centerCamera: Boolean) {
@@ -25,32 +20,18 @@ class WarStage : LifecycleStage(object : ScreenViewport() {
         camera.update()
     }
 
-    private val shapeRenderer: ShapeRenderer = ShapeRenderer().also {
-        it.color = Color(Random.nextFloat(), Random.nextFloat(), Random.nextFloat(), 1f)
-    }
-
     init {
-        val emojiTextureList = emojiWar.emojiTextureMap.values.toList().subList(0, BACKGROUND_EMOJI_DIVERSITY)
-        for (y in 1 until ROWS - 1) {
-            for (x in 1 until COLUMNS - 1) {
-                if (Random.nextFloat() > BACKGROUND_EMOJI_DENSITY) continue
-                val texture = emojiTextureList.random()
-                Image(texture).also {
-                    it.setSize(1f, 1f)
-                    it.setPosition(x.toFloat(), y.toFloat())
-                    it.setOrigin(Align.center)
-                    it.scaleY = -1f
-                    it.alpha = BACKGROUND_EMOJI_ALPHA
-                    it.rotation = Random.nextFloat() * 360f
-                    it.setScale(Random.nextFloat() * (BACKGROUND_EMOJI_SCALE_MAX - BACKGROUND_EMOJI_SCALE_MIN) +
-                        BACKGROUND_EMOJI_SCALE_MIN)
-                    it.moveBy(
-                        Random.nextFloat() * BACKGROUND_EMOJI_OFFSET_ABS * 2 - BACKGROUND_EMOJI_OFFSET_ABS,
-                        Random.nextFloat() * BACKGROUND_EMOJI_OFFSET_ABS * 2 - BACKGROUND_EMOJI_OFFSET_ABS,
-                    )
-                    addActor(it)
-                }
-            }
+        WarBackgroundActor(
+            textureList = emojiWar.emojiTextureMap.values.toList().subList(0, BACKGROUND_EMOJI_DIVERSITY),
+            rows = ROWS,
+            columns = COLUMNS,
+            density = BACKGROUND_EMOJI_DENSITY,
+            scaleMin = BACKGROUND_EMOJI_SCALE_MIN,
+            scaleMax = BACKGROUND_EMOJI_SCALE_MAX,
+            offsetAbs = BACKGROUND_EMOJI_OFFSET_ABS,
+            alpha = BACKGROUND_EMOJI_ALPHA,
+        ).also {
+            addActor(it)
         }
     }
 
@@ -103,21 +84,6 @@ class WarStage : LifecycleStage(object : ScreenViewport() {
             0f,
         )
         camera.update()
-    }
-
-    override fun draw() {
-        Gdx.gl.glEnable(GL20.GL_BLEND)
-        shapeRenderer.projectionMatrix = camera.combined
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled)
-        shapeRenderer.rect(0f, 0f, COLUMNS.toFloat(), ROWS.toFloat())
-        shapeRenderer.end()
-        Gdx.gl.glDisable(GL20.GL_BLEND)
-        super.draw()
-    }
-
-    override fun dispose() {
-        shapeRenderer.dispose()
-        super.dispose()
     }
 
     companion object {
