@@ -88,12 +88,12 @@ private class WarEngine(
     val context: WarContext = WarContext(
         rows = rows,
         columns = columns,
+        characterSpeed = characterSpeed,
     )
 
     val characterEntity: CharacterEntity = CharacterEntity(
         x = columns / 2f,
         y = rows / 2f,
-        speed = characterSpeed,
         texture = characterTexture,
     )
 
@@ -107,6 +107,7 @@ private class WarEngine(
 private class WarContext(
     val rows: Int,
     val columns: Int,
+    val characterSpeed: Float,
     var systemState: SystemState = SystemState.NONE,
     var batch: Batch? = null,
     var inputDirectionX: Direction = Direction.ZERO,
@@ -118,10 +119,6 @@ private class PositionComponent(
     var y: Float,
 ) : Component
 
-private class SpeedComponent(
-    var speed: Float,
-) : Component
-
 private class TextureComponent(
     var texture: Texture,
 ) : Component
@@ -129,12 +126,10 @@ private class TextureComponent(
 private class CharacterEntity(
     x: Float,
     y: Float,
-    speed: Float,
     texture: Texture,
 ) : Entity() {
     init {
         add(PositionComponent(x, y))
-        add(SpeedComponent(speed))
         add(TextureComponent(texture))
     }
 }
@@ -143,7 +138,6 @@ private class ActSystem(
     private val context: WarContext,
 ) : IteratingSystem(allOf(
     PositionComponent::class,
-    SpeedComponent::class,
 ).get()) {
     override fun checkProcessing(): Boolean {
         return context.systemState == SystemState.ACT
@@ -151,16 +145,15 @@ private class ActSystem(
 
     override fun processEntity(entity: Entity, deltaTime: Float) {
         val position = mapperFor<PositionComponent>().get(entity)
-        val speed = mapperFor<SpeedComponent>().get(entity)
         val velocityX = when (context.inputDirectionX) {
             Direction.ZERO -> 0f
-            Direction.NEGATIVE -> -speed.speed
-            Direction.POSITIVE -> speed.speed
+            Direction.NEGATIVE -> -context.characterSpeed
+            Direction.POSITIVE -> context.characterSpeed
         }
         val velocityY = when (context.inputDirectionY) {
             Direction.ZERO -> 0f
-            Direction.NEGATIVE -> -speed.speed
-            Direction.POSITIVE -> speed.speed
+            Direction.NEGATIVE -> -context.characterSpeed
+            Direction.POSITIVE -> context.characterSpeed
         }
         val minX = 0.5f
         val maxX = context.columns - 0.5f
